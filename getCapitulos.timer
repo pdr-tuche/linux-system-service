@@ -1,0 +1,9 @@
+[Unit]
+Description=Timer para o serviço getCapitulos
+
+[Timer]
+OnCalendar=*:0/1
+Unit=getCapitulos.service
+
+[Install]
+WantedBy=timers.target

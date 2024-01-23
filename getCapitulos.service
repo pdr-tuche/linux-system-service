@@ -1,0 +1,13 @@
+[Unit]
+Description=rodar_script_biblia
+After=network.target
+
+[Service]
+User=contato_nevespedro
+Group=contato_nevespedro
+WorkingDirectory=/home/contato_nevespedro/linux-system-service
+Environment="PATH=/home/contato_nevespedro/linux-system-service/venv/bin"
+ExecStart=/home/contato_nevespedro/linux-system-service/venv/bin/python /home/contato_nevespedro/linux-system-service/getCapitulos.py
+
+[Install]
+WantedBy=multi-user.target
