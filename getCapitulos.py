@@ -63,8 +63,8 @@ def verificar_ultimo_capitulo(livro):
 
 def maximo_de_capitulos_do_livro(livro, cap):
     global capitulos_completos
-    capitulos_completos[livro] = cap - 1
-    with open('capitulos_completos.json', 'w') as file:  # verifica isso aqui se ta sobrescrevendo
+    capitulos_completos[f'{livro}'] = cap - 1
+    with open('capitulos_completos.json', 'w') as file:
         json.dump(capitulos_completos, file, indent=2)
 
 
@@ -93,8 +93,9 @@ def capitulos_request(version):
                 url = f"https://www.abibliadigital.com.br/api/verses/{version}/{livro}/{cap}"
                 response = requests.get(url)
                 print(response.status_code)
-                if response.status_code == 404 and response.json()['msg'] == 'chapter not found':
+                if response.status_code == 404:
                     maximo_de_capitulos_do_livro(livro, cap)
+                    break
                 elif response.status_code == 200:
                     criar_pasta_livro(livro)
                     salvar_capitulo(livro, cap, response)
